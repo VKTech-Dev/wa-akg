@@ -52,3 +52,6 @@ next-env.d.ts
 /public/media/*
 server.log
 /logs/
+
+# graphify (grafo local gerado)
+graphify-out/
