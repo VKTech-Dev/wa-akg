@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type { WASocket } from "@whiskeysockets/baileys";
 import { logger } from "@/lib/logger";
+import { usableName } from "./contact-names";
 
 /**
  * Sync contacts from WhatsApp to database.
@@ -47,7 +48,7 @@ export function bindContactSync(sock: WASocket, sessionId: string) {
                         profilePic: update.imgUrl
                     },
                     update: {
-                        name: update.name || undefined,
+                        name: usableName(update.name),
                         notify: update.notify || undefined,
                         profilePic: update.imgUrl || undefined
                     }
@@ -82,7 +83,7 @@ export function bindContactSync(sock: WASocket, sessionId: string) {
                         notify: (chat as any).notify || undefined
                     },
                     update: {
-                        name: chat.name || undefined
+                        name: usableName(chat.name)
                     }
                 });
             } catch (e) {
@@ -105,7 +106,7 @@ export function bindContactSync(sock: WASocket, sessionId: string) {
                             notify: contact.notify
                         },
                         update: {
-                            name: contact.name || undefined,
+                            name: usableName(contact.name),
                             notify: contact.notify || undefined
                         }
                     });

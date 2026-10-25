@@ -7,6 +7,7 @@ import { resolveToPhoneJid, isLidJid, normalizeJid } from "@/lib/jid-utils";
 
 import { Server } from "socket.io";
 import { logger } from "@/lib/logger";
+import { usableName } from "./contact-names";
 
 export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server | null) => {
     // Set start time for uptime command
@@ -149,7 +150,7 @@ export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server |
                     update: {
                         // @ts-ignore
                         lid: c.lid || undefined,
-                        name: c.name || undefined,
+                        name: usableName(c.name),
                         notify: c.notify || undefined,
                         // @ts-ignore
                         verifiedName: c.verifiedName || undefined,
