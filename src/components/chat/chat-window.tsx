@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { getChatMessages, sendChatMessage, sendMediaMessage } from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
+import { Linkify } from "./linkify";
 import { InteractiveMessageDialog } from "./interactive-message-dialog";
 import { useTranslations } from "next-intl";
 
@@ -562,7 +563,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                         )}
                                         {/* Text */}
                                         <div className="flex items-end gap-2">
-                                            <span className="flex-1 text-sm break-all whitespace-pre-wrap">{msg.content}</span>
+                                            <span className="flex-1 text-sm break-all whitespace-pre-wrap"><Linkify text={msg.content || ""} /></span>
                                             <span className={cn("text-[9px] shrink-0 leading-none", msg.fromMe ? "text-primary-foreground/60" : "text-muted-foreground")}>
                                                 {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </span>

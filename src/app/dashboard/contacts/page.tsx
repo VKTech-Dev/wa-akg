@@ -183,7 +183,7 @@ export default function ContactListPage() {
                                                 </TableCell>
                                                 <TableCell>
                                                     <div className="flex flex-col">
-                                                        <span className="font-medium">{contact.name || contact.notify || tCommon("unknown")}</span>
+                                                        <span className="font-medium">{contact.name || contact.notify || (contact.remoteJidAlt ? `+${contact.remoteJidAlt.split("@")[0]}` : tCommon("unknown"))}</span>
                                                         {contact.verifiedName && (
                                                             <span className="text-xs text-green-600 flex items-center gap-1">
                                                                 ✓ {contact.verifiedName}
