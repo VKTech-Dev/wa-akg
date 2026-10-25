@@ -6,6 +6,7 @@ import { TopLoader } from "@/components/ui/top-loader";
 import { prisma } from "@/lib/prisma";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -104,6 +105,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning className="scroll-smooth">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         {/* Conditional robots meta (noindex for staging/dev) */}
         {!allowIndexing && <meta name="robots" content="noindex, nofollow" />}
         {/* DNS prefetch for performance */}

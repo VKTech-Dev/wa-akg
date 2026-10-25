@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { navGroups } from "./sidebar-nav";
 import pkg from "../../../package.json";
 
@@ -98,6 +99,7 @@ export function MobileNav({ appName = "WA-AKG" }: { appName?: string }) {
                         </div>
                     </div>
                     <LanguageSwitcher className="w-full mb-2" />
+                    <ThemeToggle className="w-full mb-2 justify-center" />
                     <Button
                         variant="outline"
                         size="sm"

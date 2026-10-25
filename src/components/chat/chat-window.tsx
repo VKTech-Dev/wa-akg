@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video, Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X, Sparkles } from "lucide-react";
+import { Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video, Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X, Sparkles, Check, CheckCheck, Clock } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
     AlertDialog,
@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { getChatMessages, sendChatMessage, sendMediaMessage } from "@/app/dashboard/chat/actions";
 import { useSocket } from "./socket-context";
 import { Linkify } from "./linkify";
+import "./whatsapp-theme.css";
 import { InteractiveMessageDialog } from "./interactive-message-dialog";
 import { useTranslations } from "next-intl";
 
@@ -435,10 +436,8 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
             </div>
 
             {/* Messages */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-4 py-3 min-h-0 styled-scrollbar" onScroll={handleScroll}
-                style={{ backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--muted-foreground) / 0.04) 1px, transparent 0)`, backgroundSize: '24px 24px' }}
-            >
-                <div className="flex flex-col gap-3 max-w-3xl mx-auto">
+            <div ref={scrollRef} className="wa-chat flex-1 overflow-y-auto px-3 sm:px-8 py-3 min-h-0 styled-scrollbar" onScroll={handleScroll}>
+                <div className="flex flex-col gap-[2px] w-full">
                     {loading && messages.length === 0 && (
                         <div className="flex-1 flex items-center justify-center py-32">
                             <div className="h-6 w-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
@@ -446,7 +445,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                     )}
                     {!hasMore && messages.length > 0 && (
                         <div className="text-center py-4">
-                            <span className="text-[10px] font-medium text-muted-foreground bg-background/80 px-3 py-1 rounded-full border border-border/30">{t("beginningOfConversation")}</span>
+                            <span className="wa-pill">{t("beginningOfConversation")}</span>
                         </div>
                     )}
                     {messages.length === 0 && !loading && (
@@ -454,11 +453,12 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                     )}
                     {messages.map((msg, idx) => {
                         const showDate = idx === 0 || getDateLabel(msg.timestamp) !== getDateLabel(messages[idx - 1].timestamp);
+                        const startsRun = showDate || messages[idx - 1].fromMe !== msg.fromMe;
                         return (
-                            <div key={msg.keyId} id={`msg-${msg.keyId}`}>
+                            <div key={msg.keyId} id={`msg-${msg.keyId}`} className={startsRun && idx > 0 ? "mt-2" : undefined}>
                                 {showDate && (
                                     <div className="flex justify-center my-3">
-                                        <span className="text-[10px] font-medium text-muted-foreground bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-border/30">
+                                        <span className="wa-pill">
                                             {getDateLabel(msg.timestamp)}
                                         </span>
                                     </div>
@@ -473,8 +473,9 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                         </button>
                                     )}
                                     <div className={cn(
-                                        "flex flex-col max-w-[85%] sm:max-w-[70%] rounded-2xl px-3 py-2 shadow-sm overflow-hidden cursor-context-menu",
-                                        msg.fromMe ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-background border border-border/40 rounded-bl-sm"
+                                        "wa-bubble flex flex-col max-w-[85%] sm:max-w-[65%] cursor-context-menu",
+                                        msg.fromMe ? "wa-bubble-out" : "wa-bubble-in",
+                                        startsRun && "wa-tail"
                                     )} onContextMenu={(e) => handleContextMenu(e, msg)}>
                                         {!msg.fromMe && jid.endsWith("@g.us") && msg.pushName && (
                                             <span className="text-[10px] font-semibold text-primary block mb-0.5">{msg.pushName}</span>
@@ -482,10 +483,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                         {msg.quoted && (
                                             <div 
                                                 className={cn(
-                                                    "mb-1.5 px-2 py-1 rounded-lg border-l-4 text-xs select-none cursor-pointer text-left bg-muted/40",
-                                                    msg.fromMe 
-                                                        ? "border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground/90 hover:bg-primary-foreground/15" 
-                                                        : "border-primary bg-muted text-muted-foreground hover:bg-muted/60"
+                                                    "wa-quote mb-1.5 px-2 py-1 rounded-md text-xs select-none cursor-pointer text-left"
                                                 )}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
@@ -563,9 +561,15 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                                         )}
                                         {/* Text */}
                                         <div className="flex items-end gap-2">
-                                            <span className="flex-1 text-sm break-all whitespace-pre-wrap"><Linkify text={msg.content || ""} /></span>
-                                            <span className={cn("text-[9px] shrink-0 leading-none", msg.fromMe ? "text-primary-foreground/60" : "text-muted-foreground")}>
+                                            <span className="flex-1 text-[14.2px] leading-[19px] break-words whitespace-pre-wrap"><Linkify text={msg.content || ""} /></span>
+                                            <span className="wa-meta shrink-0">
                                                 {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                {msg.fromMe && (
+                                                    msg.status === "READ" ? <CheckCheck className="h-3.5 w-3.5 wa-read" />
+                                                    : msg.status === "DELIVERED" ? <CheckCheck className="h-3.5 w-3.5" />
+                                                    : msg.status === "PENDING" ? <Clock className="h-3 w-3" />
+                                                    : <Check className="h-3.5 w-3.5" />
+                                                )}
                                             </span>
                                         </div>
                                     </div>

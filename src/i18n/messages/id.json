@@ -47,6 +47,9 @@
     "deleted": "Berhasil dihapus",
     "sortBy": "Urutkan"
   },
+  "theme": {
+    "toggle": "Ganti tema terang/gelap"
+  },
   "language": {
     "label": "Bahasa",
     "changeFailed": "Gagal mengganti bahasa"

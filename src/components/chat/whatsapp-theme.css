@@ -1,0 +1,87 @@
+/* WhatsApp-like chat: colours, bubbles with tail, date pill. Scoped to .wa-chat. */
+.wa-chat {
+  --wa-bg: #efeae2;
+  --wa-in: #ffffff;
+  --wa-out: #d9fdd3;
+  --wa-text: #111b21;
+  --wa-meta: #667781;
+  --wa-pill: #ffffffd9;
+  --wa-dot: rgba(11, 20, 26, 0.05);
+  --wa-read: #53bdeb;
+  --wa-link: #027eb5;
+  background-color: var(--wa-bg);
+  background-image: radial-gradient(circle at 1px 1px, var(--wa-dot) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.dark .wa-chat {
+  --wa-bg: #0b141a;
+  --wa-in: #202c33;
+  --wa-out: #005c4b;
+  --wa-text: #e9edef;
+  --wa-meta: #8696a0;
+  --wa-pill: #182229e6;
+  --wa-dot: rgba(233, 237, 239, 0.035);
+  --wa-link: #53bdeb;
+}
+
+.wa-chat .wa-pill {
+  background: var(--wa-pill);
+  color: var(--wa-meta);
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 12px;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
+}
+
+.wa-chat .wa-bubble {
+  position: relative;
+  color: var(--wa-text);
+  border-radius: 8px;
+  padding: 5px 8px 6px 9px;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
+}
+
+.wa-chat .wa-bubble-in { background: var(--wa-in); }
+.wa-chat .wa-bubble-out { background: var(--wa-out); }
+
+.wa-chat .wa-bubble-in.wa-tail { border-top-left-radius: 0; }
+.wa-chat .wa-bubble-out.wa-tail { border-top-right-radius: 0; }
+
+.wa-chat .wa-bubble.wa-tail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 13px;
+}
+.wa-chat .wa-bubble-in.wa-tail::before {
+  left: -8px;
+  background: var(--wa-in);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+.wa-chat .wa-bubble-out.wa-tail::before {
+  right: -8px;
+  background: var(--wa-out);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.wa-chat .wa-meta {
+  color: var(--wa-meta);
+  font-size: 11px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.wa-chat .wa-bubble-out .wa-meta { color: color-mix(in srgb, var(--wa-text) 60%, transparent); }
+.wa-chat .wa-read { color: var(--wa-read); }
+
+.wa-chat .wa-quote {
+  background: rgba(0, 0, 0, 0.14);
+  border-left: 4px solid #06cf9c;
+  color: var(--wa-meta);
+}
+.wa-chat .wa-bubble-in .wa-quote { border-left-color: #53bdeb; }
+
+.wa-chat .wa-link { color: var(--wa-link); word-break: break-all; }

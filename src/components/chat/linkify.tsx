@@ -34,7 +34,7 @@ export function Linkify({ text }: { text: string }): ReactNode {
                         href={p.href}
                         target="_blank"
                         rel="noopener noreferrer nofollow"
-                        className="underline underline-offset-2 hover:opacity-80"
+                        className="wa-link hover:underline underline-offset-2"
                         onClick={e => e.stopPropagation()}
                     >
                         {p.text}

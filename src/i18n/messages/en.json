@@ -47,6 +47,9 @@
     "deleted": "Deleted successfully",
     "sortBy": "Sort by"
   },
+  "theme": {
+    "toggle": "Toggle light/dark theme"
+  },
   "language": {
     "label": "Language",
     "changeFailed": "Failed to change language"

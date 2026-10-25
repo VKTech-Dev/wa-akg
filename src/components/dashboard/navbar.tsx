@@ -6,6 +6,7 @@ import { SessionSelector } from "@/components/dashboard/session-selector";
 import { Button } from "@/components/ui/button";
 import { RealtimeClock } from "@/components/dashboard/realtime-clock";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Bell, Inbox, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -151,6 +152,7 @@ export function Navbar({ appName }: NavbarProps) {
                 <span className="hidden sm:inline"><RealtimeClock /></span>
                 <SessionSelector />
                 <LanguageSwitcher className="hidden sm:flex" />
+                <ThemeToggle />
                 <div className="h-6 w-px bg-border/50 hidden sm:block" />
 
                 <Popover open={isOpen} onOpenChange={setIsOpen}>

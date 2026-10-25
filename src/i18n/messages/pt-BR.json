@@ -47,6 +47,9 @@
     "deleted": "Excluído com sucesso",
     "sortBy": "Ordenar por"
   },
+  "theme": {
+    "toggle": "Alternar tema claro/escuro"
+  },
   "language": {
     "label": "Idioma",
     "changeFailed": "Falha ao alterar o idioma"
