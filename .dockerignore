@@ -21,6 +21,10 @@ test-*.js
 fix_test.js
 *.patch
 
+# Runtime data (bind mounts in docker-compose.yml, never part of the image)
+dados
+data
+
 # Environment
 .env
 .env.local
