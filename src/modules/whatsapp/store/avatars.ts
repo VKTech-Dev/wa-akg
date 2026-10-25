@@ -9,6 +9,8 @@ export const AVATARS_DIR = path.join(process.cwd(), "data", "avatars");
 const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2 MB
 const MAX_CACHE_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 const RATE_LIMIT_PAUSE_MS = 10 * 60 * 1000; // 10 minutes
+const PROFILE_QUERY_TIMEOUT_MS = 15 * 1000; // Baileys default is 60 s
+const ITEM_HARD_TIMEOUT_MS = 30 * 1000; // never let one JID stall the whole queue
 
 // In-memory alias mapping between session slug and database CUID
 const sessionAliasMap = new Map<string, string>();
@@ -69,6 +71,23 @@ export function isAvatarFresh(filePath: string, maxAgeMs = MAX_CACHE_AGE_MS): bo
 }
 
 /**
+ * JIDs that never have a useful profile picture (status, broadcast lists, channels).
+ */
+export function isFetchableJid(jid: string): boolean {
+    if (!jid) return false;
+    if (jid === "status@broadcast") return false;
+    return !jid.endsWith("@broadcast") && !jid.endsWith("@newsletter");
+}
+
+/**
+ * Short label for the JID kind, safe to log (no phone number).
+ */
+function jidKind(jid: string): string {
+    const at = jid.lastIndexOf("@");
+    return at >= 0 ? jid.slice(at) : "unknown";
+}
+
+/**
  * Prioritize JIDs: recent messages first, followed by others, deduplicated.
  */
 export function prioritizeJids(recentJids: string[], otherJids: string[]): string[] {
@@ -88,23 +107,29 @@ export function prioritizeJids(recentJids: string[], otherJids: string[]): strin
 }
 
 /**
- * Get avatar URL if file exists, else null.
+ * Resolve the avatar file name that exists on disk for a session and JID, else null.
  */
-export function avatarUrlFor(sessionId: string, jid: string): string | null {
+export function resolveAvatarFile(sessionId: string, jid: string): string | null {
     const fileName = avatarFileName(sessionId, jid);
-    const filePath = path.join(AVATARS_DIR, fileName);
-    if (existsSync(filePath)) {
-        return `/api/avatars/${fileName}`;
+    if (existsSync(path.join(AVATARS_DIR, fileName))) {
+        return fileName;
     }
     const alias = sessionAliasMap.get(sessionId);
     if (alias) {
         const aliasFileName = avatarFileName(alias, jid);
-        const aliasPath = path.join(AVATARS_DIR, aliasFileName);
-        if (existsSync(aliasPath)) {
-            return `/api/avatars/${aliasFileName}`;
+        if (existsSync(path.join(AVATARS_DIR, aliasFileName))) {
+            return aliasFileName;
         }
     }
     return null;
+}
+
+/**
+ * Get avatar URL if file exists, else null.
+ */
+export function avatarUrlFor(sessionId: string, jid: string): string | null {
+    const fileName = resolveAvatarFile(sessionId, jid);
+    return fileName ? `/api/avatars/${fileName}` : null;
 }
 
 interface SessionAvatarState {
@@ -115,6 +140,7 @@ interface SessionAvatarState {
     isProcessing: boolean;
     isStopped: boolean;
     pausedUntil: number;
+    startedFetching: boolean;
     timer: NodeJS.Timeout | null;
 }
 
@@ -201,8 +227,9 @@ async function fetchAndSaveAvatar(state: SessionAvatarState, jid: string): Promi
     }
 
     let ppUrl: string | undefined;
+    const queryStartedAt = Date.now();
     try {
-        ppUrl = await sock.profilePictureUrl(targetJid, "preview");
+        ppUrl = await sock.profilePictureUrl(targetJid, "preview", PROFILE_QUERY_TIMEOUT_MS);
     } catch (err: unknown) {
         const errorObj = err as BaileysErrorLike;
         const errMsg = String(errorObj?.message || errorObj?.data || err || "").toLowerCase();
@@ -241,7 +268,7 @@ async function fetchAndSaveAvatar(state: SessionAvatarState, jid: string): Promi
                 });
                 if (contact?.remoteJidAlt && contact.remoteJidAlt !== jid) {
                     try {
-                        ppUrl = await sock.profilePictureUrl(contact.remoteJidAlt, "preview");
+                        ppUrl = await sock.profilePictureUrl(contact.remoteJidAlt, "preview", PROFILE_QUERY_TIMEOUT_MS);
                     } catch {}
                 }
             } catch {}
@@ -255,6 +282,12 @@ async function fetchAndSaveAvatar(state: SessionAvatarState, jid: string): Promi
     }
 
     if (!ppUrl) {
+        // Baileys resolves a timed out query to undefined instead of throwing:
+        // a slow answer is a timeout, not proof that the contact has no picture.
+        if (Date.now() - queryStartedAt >= PROFILE_QUERY_TIMEOUT_MS - 500) {
+            logger.warn("Avatars", `Query timed out for ${jidKind(jid)}, will retry on next run`);
+            return;
+        }
         saveNoneMarker(sessionId, jid, dbSessionId);
         return;
     }
@@ -322,7 +355,38 @@ async function processQueue(sessionId: string): Promise<void> {
             const jid = state.queue.shift();
             if (!jid) continue;
 
-            await fetchAndSaveAvatar(state, jid);
+            // Already resolved recently: move on without waiting
+            if (
+                isAvatarFresh(path.join(AVATARS_DIR, avatarFileName(sessionId, jid))) ||
+                isAvatarFresh(path.join(AVATARS_DIR, avatarNoneFileName(sessionId, jid)))
+            ) {
+                continue;
+            }
+
+            if (!state.startedFetching) {
+                state.startedFetching = true;
+                logger.info("Avatars", `Fetching started (${state.queue.length + 1} left to check)`);
+            }
+
+            const startedAt = Date.now();
+            let hardTimer: NodeJS.Timeout | undefined;
+            await Promise.race([
+                fetchAndSaveAvatar(state, jid),
+                new Promise<void>(resolve => {
+                    hardTimer = setTimeout(() => {
+                        logger.warn("Avatars", `${jidKind(jid)} took over ${ITEM_HARD_TIMEOUT_MS / 1000}s, skipping`);
+                        resolve();
+                    }, ITEM_HARD_TIMEOUT_MS);
+                })
+            ]);
+            if (hardTimer) clearTimeout(hardTimer);
+            const elapsed = Date.now() - startedAt;
+            const outcome = existsSync(path.join(AVATARS_DIR, avatarFileName(sessionId, jid)))
+                ? "photo"
+                : existsSync(path.join(AVATARS_DIR, avatarNoneFileName(sessionId, jid)))
+                    ? "none"
+                    : "no-result";
+            logger.info("Avatars", `${jidKind(jid)} ${outcome} in ${elapsed}ms (${state.queue.length} left)`);
 
             if (state.queue.length > 0 && !state.isStopped) {
                 // Random delay between 2 and 4 seconds
@@ -391,7 +455,7 @@ async function initSessionQueue(sessionId: string): Promise<void> {
             }
         }
 
-        const prioritized = prioritizeJids(recentJids, otherJids);
+        const prioritized = prioritizeJids(recentJids, otherJids).filter(isFetchableJid);
         state.queue = prioritized;
         logger.info("Avatars", `Initialized avatar sync queue for session ${sessionId} (${prioritized.length} targets)`);
 
@@ -424,6 +488,7 @@ export function bindAvatarSync(sock: WASocket, sessionId: string): void {
         isProcessing: false,
         isStopped: false,
         pausedUntil: 0,
+        startedFetching: false,
         timer: null
     };
 

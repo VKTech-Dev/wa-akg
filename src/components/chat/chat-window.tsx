@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Send, Paperclip, ArrowLeft, FileText, Image as ImageIcon, Music, Video, Download, ArrowDown, CornerUpLeft, Copy, Trash2, Info, X, Sparkles } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -422,6 +422,7 @@ export function ChatWindow({ sessionId, jid, name, onBack }: ChatWindowProps) {
                     </Button>
                 )}
                 <Avatar className="h-9 w-9 shrink-0">
+                    <AvatarImage src={`/api/avatars/by-jid/${encodeURIComponent(sessionId)}/${encodeURIComponent(jid)}`} alt="" />
                     <AvatarFallback className="text-xs font-medium bg-gradient-to-br from-primary/20 to-blue-500/20 text-primary">
                         {displayName.slice(0, 2).toUpperCase()}
                     </AvatarFallback>

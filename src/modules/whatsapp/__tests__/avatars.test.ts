@@ -8,8 +8,10 @@ import {
     avatarNoneFileName,
     isAllowedAvatarHost,
     isAvatarFresh,
+    isFetchableJid,
     prioritizeJids,
     avatarUrlFor,
+    resolveAvatarFile,
     registerSessionAlias,
     AVATARS_DIR
 } from "../store/avatars";
@@ -157,3 +159,37 @@ describe("avatarUrlFor", () => {
     });
 });
 
+
+describe("isFetchableJid", () => {
+    it("accepts users, groups and lids", () => {
+        assert.equal(isFetchableJid("5511999999999@s.whatsapp.net"), true);
+        assert.equal(isFetchableJid("120363000000000000@g.us"), true);
+        assert.equal(isFetchableJid("100429287395370@lid"), true);
+    });
+
+    it("rejects status, broadcast lists, channels and empty values", () => {
+        assert.equal(isFetchableJid("status@broadcast"), false);
+        assert.equal(isFetchableJid("1234567890@broadcast"), false);
+        assert.equal(isFetchableJid("120363000000000000@newsletter"), false);
+        assert.equal(isFetchableJid(""), false);
+    });
+});
+
+describe("resolveAvatarFile", () => {
+    it("returns null when no avatar file exists", () => {
+        assert.equal(resolveAvatarFile("no-such-session", "0@s.whatsapp.net"), null);
+    });
+
+    it("returns the file name when the file exists", () => {
+        const jid = "5511888888888@s.whatsapp.net";
+        const fileName = avatarFileName("session-resolve", jid);
+        const filePath = path.join(AVATARS_DIR, fileName);
+        fs.mkdirSync(AVATARS_DIR, { recursive: true });
+        fs.writeFileSync(filePath, "x");
+        try {
+            assert.equal(resolveAvatarFile("session-resolve", jid), fileName);
+        } finally {
+            fs.unlinkSync(filePath);
+        }
+    });
+});
