@@ -6,6 +6,7 @@ import path from "path";
 import pino from "pino";
 import { resolveToPhoneJidBySessionId as resolveToPhoneJid, isLidJid } from "./jid-utils";
 import { logger } from "./logger";
+import { findMediaMessageType } from "./media-type";
 import { waManager } from "@/modules/whatsapp/manager";
 
 // Event types that can trigger webhooks
@@ -392,10 +393,10 @@ export async function downloadAndSaveMedia(message: WAMessage, sessionId: string
             return null;
         }
 
-        const messageType = Object.keys(messageContent)[0];
+        const messageType = findMediaMessageType(messageContent);
 
-        if (!['imageMessage', 'videoMessage', 'audioMessage', 'documentMessage', 'stickerMessage'].includes(messageType)) {
-            logger.debug("Media", `Message type ${messageType} is not a downloadable media.`);
+        if (!messageType) {
+            logger.debug("Media", `Message type ${Object.keys(messageContent)[0]} is not a downloadable media.`);
             return null;
         }
 

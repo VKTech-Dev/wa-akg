@@ -25,6 +25,9 @@ fix_test.js
 dados
 data
 
+# Fork documentation and design mockups (not part of the app)
+vk-fork-notes
+
 # Environment
 .env
 .env.local
