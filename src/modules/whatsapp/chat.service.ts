@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { normalizeJid } from "@/lib/jid-utils";
 import { waManager } from "@/modules/whatsapp/manager";
 import { onMessageSent } from "@/lib/webhook";
+import { avatarUrlFor } from "./store/avatars";
 import Sticker from "wa-sticker-formatter";
 import type { InteractiveMessagePayload, AlbumItem } from "./interactive";
 
@@ -79,8 +80,8 @@ export class ChatService {
 
         // Build lookup map
         const infoMap = new Map<string, { name: string | null; notify: string | null; profilePic: string | null }>();
-        contacts.forEach(c => infoMap.set(c.jid, { name: c.name, notify: c.notify, profilePic: c.profilePic }));
-        groups.forEach(g => infoMap.set(g.jid, { name: g.subject, notify: g.subject, profilePic: null }));
+        contacts.forEach(c => infoMap.set(c.jid, { name: c.name, notify: c.notify, profilePic: avatarUrlFor(dbSessionId, c.jid) }));
+        groups.forEach(g => infoMap.set(g.jid, { name: g.subject, notify: g.subject, profilePic: avatarUrlFor(dbSessionId, g.jid) }));
 
         // 3. Build result array (already sorted by SQL DESC)
         const result: any[] = [];

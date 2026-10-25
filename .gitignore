@@ -47,6 +47,8 @@ next-env.d.ts
 # media files (downloaded by app)
 /data/media/*
 !/data/media/.gitkeep
+# avatars (profile pictures fetched by the app)
+/data/avatars/*
 /public/media/*
 server.log
 /logs/

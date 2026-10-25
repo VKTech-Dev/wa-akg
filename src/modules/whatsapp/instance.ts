@@ -14,6 +14,7 @@ import { syncGroups } from "./store/groups";
 import { bindContactSync } from "./store/contacts";
 import { bindAutoReply } from "./store/autoreply";
 import { bindPpGuard } from "./store/ppguard";
+import { bindAvatarSync } from "./store/avatars";
 import { antispam } from "./antispam";
 import { logger } from "@/lib/logger";
 import { isInteractiveContent, handleInteractiveMessageDispatch } from "./interactive";
@@ -236,6 +237,7 @@ export class WhatsAppInstance {
 
                 bindAutoReply(this.socket as WASocket, this.sessionId);
                 bindPpGuard(this.socket as WASocket, this.sessionId);
+                bindAvatarSync(this.socket as WASocket, this.sessionId);
 
                 await prisma.session.update({
                     where: { sessionId: this.sessionId },

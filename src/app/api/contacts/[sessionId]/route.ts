@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { batchResolveToPhoneJid } from "@/lib/jid-utils";
 import { getAuthenticatedUser, canAccessSession } from "@/lib/api-auth";
+import { avatarUrlFor } from "@/modules/whatsapp/store/avatars";
 
 export async function GET(
     req: NextRequest,
@@ -66,10 +67,15 @@ export async function GET(
             prisma.contact.count({ where })
         ]);
 
+        const contactsWithAvatars = contacts.map(c => ({
+            ...c,
+            profilePic: avatarUrlFor(sessionId, c.jid)
+        }));
+
         return NextResponse.json({
             status: true,
             message: "Contacts retrieved successfully",
-            data: contacts,
+            data: contactsWithAvatars,
             meta: {
                 total,
                 page: isAll ? 1 : page,

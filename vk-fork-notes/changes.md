@@ -2,6 +2,18 @@
 
 Uma entrada por alteração, da mais nova para a mais antiga. Campos: data, arquivos, motivo, commit.
 
+## 2026-10-24 — Sincronização e entrega de fotos de perfil (avatars)
+
+- Arquivos do upstream editados: `src/modules/whatsapp/instance.ts`, `src/modules/whatsapp/chat.service.ts`, `src/app/api/contacts/[sessionId]/route.ts`, `.gitignore` (linha `/data/avatars/*`, risco de conflito baixo).
+- Arquivos novos: `src/modules/whatsapp/store/avatars.ts`, `src/app/api/avatars/[filename]/route.ts`, `src/modules/whatsapp/__tests__/avatars.test.ts`.
+- Motivo: busca sob demanda/fila, armazenamento local em `data/avatars` e entrega autenticada de fotos de perfil de contatos e grupos, populando `profilePic` na lista de chats e contatos.
+- Commit: pendente (aguardando aprovação do usuário).
+- Risco de conflito no merge:
+  - `src/modules/whatsapp/instance.ts`: baixo (adição de import e chamada de `bindAvatarSync` junto aos outros hooks de inicialização).
+  - `src/modules/whatsapp/chat.service.ts`: médio (substituição do valor estático de `profilePic` pelo resultado de `avatarUrlFor` na montagem do `infoMap`).
+  - `src/app/api/contacts/[sessionId]/route.ts`: baixo-médio (mapeamento de `contacts` com `profilePic` vindo de `avatarUrlFor`).
+  - Arquivos novos (`avatars.ts`, rota de avatars, teste): sem risco (inexistentes no upstream).
+
 ## 2026-10-24 — Compose no padrão de persistência local
 
 - Arquivos: `docker-compose.yml`, `.env.example`, `.gitignore`.
