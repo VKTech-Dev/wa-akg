@@ -3,6 +3,7 @@ import { normalizeJid } from "@/lib/jid-utils";
 import { waManager } from "@/modules/whatsapp/manager";
 import { onMessageSent } from "@/lib/webhook";
 import { avatarUrlFor } from "./store/avatars";
+import { avatarUrlForPerson, pickPersonName } from "@/lib/contact-twins";
 import Sticker from "wa-sticker-formatter";
 import type { InteractiveMessagePayload, AlbumItem } from "./interactive";
 
@@ -69,8 +70,9 @@ export class ChatService {
         const jids = rawLastMessages.map(m => m.remoteJid);
         const [contacts, groups] = await Promise.all([
             prisma.contact.findMany({
-                where: { sessionId: dbSessionId, jid: { in: jids } },
-                select: { jid: true, name: true, notify: true, profilePic: true }
+                // the phone row and its @lid twin are the same person
+                where: { sessionId: dbSessionId, OR: [{ jid: { in: jids } }, { remoteJidAlt: { in: jids } }] },
+                select: { jid: true, lid: true, remoteJidAlt: true, name: true, notify: true, profilePic: true }
             }),
             prisma.group.findMany({
                 where: { sessionId: dbSessionId, jid: { in: jids } },
@@ -78,9 +80,19 @@ export class ChatService {
             })
         ]);
 
-        // Build lookup map
+        // Build lookup map: each chat jid -> everything known about that person
         const infoMap = new Map<string, { name: string | null; notify: string | null; profilePic: string | null }>();
-        contacts.forEach(c => infoMap.set(c.jid, { name: c.name, notify: c.notify, profilePic: avatarUrlFor(dbSessionId, c.jid) }));
+        const rowsByChat = new Map<string, typeof contacts>();
+        for (const c of contacts) {
+            for (const chatJid of new Set([c.jid, c.remoteJidAlt])) {
+                if (chatJid && jids.includes(chatJid)) rowsByChat.set(chatJid, [...(rowsByChat.get(chatJid) || []), c]);
+            }
+        }
+        for (const [chatJid, rows] of rowsByChat) {
+            const { name, notify } = pickPersonName(rows);
+            const own = rows.find(r => r.jid === chatJid) || rows[0];
+            infoMap.set(chatJid, { name, notify, profilePic: avatarUrlForPerson(dbSessionId, { ...own, jid: chatJid }) });
+        }
         groups.forEach(g => infoMap.set(g.jid, { name: g.subject, notify: g.subject, profilePic: avatarUrlFor(dbSessionId, g.jid) }));
 
         // 3. Build result array (already sorted by SQL DESC)

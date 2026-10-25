@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { batchResolveToPhoneJid } from "@/lib/jid-utils";
 import { getAuthenticatedUser, canAccessSession } from "@/lib/api-auth";
-import { avatarUrlFor } from "@/modules/whatsapp/store/avatars";
+import { avatarUrlForPerson, hiddenTwinIds, twinPhonesMatching } from "@/lib/contact-twins";
 
 export async function GET(
     req: NextRequest,
@@ -43,8 +43,14 @@ export async function GET(
             sessionId: sessionData.id,
         };
 
+        // one row per person: the @lid row is hidden when its phone twin exists
+        const hidden = await hiddenTwinIds(sessionData.id);
+        if (hidden.length > 0) where.id = { notIn: hidden };
+
         if (search) {
+            const twinPhones = await twinPhonesMatching(sessionData.id, search);
             where.OR = [
+                ...(twinPhones.length > 0 ? [{ jid: { in: twinPhones } }] : []),
                 { name: { contains: search } },
                 { notify: { contains: search } },
                 { verifiedName: { contains: search } },
@@ -69,7 +75,7 @@ export async function GET(
 
         const contactsWithAvatars = contacts.map(c => ({
             ...c,
-            profilePic: avatarUrlFor(sessionId, c.jid)
+            profilePic: avatarUrlForPerson(sessionId, c)
         }));
 
         return NextResponse.json({

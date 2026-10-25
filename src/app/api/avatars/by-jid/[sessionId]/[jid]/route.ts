@@ -3,6 +3,8 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { getAuthenticatedUser, canAccessSession } from "@/lib/api-auth";
 import { logger } from "@/lib/logger";
+import { prisma } from "@/lib/prisma";
+import { personJids, personRows } from "@/lib/contact-twins";
 import { AVATARS_DIR, resolveAvatarFile } from "@/modules/whatsapp/store/avatars";
 
 // GET: profile picture of a JID, looked up by session (used by the chat header)
@@ -28,7 +30,18 @@ export async function GET(
             return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session's avatars", error: "Forbidden - Cannot access this session's avatars" }, { status: 403 });
         }
 
-        const fileName = resolveAvatarFile(sessionId, decodeURIComponent(jid));
+        const wanted = decodeURIComponent(jid);
+        let fileName = resolveAvatarFile(sessionId, wanted);
+        if (!fileName) {
+            // the picture may be saved under the other id of the same person
+            const session = await prisma.session.findUnique({ where: { sessionId }, select: { id: true } });
+            const rows = session ? await personRows(session.id, wanted) : [];
+            for (const row of rows) {
+                for (const alias of personJids(row)) {
+                    fileName = fileName || resolveAvatarFile(sessionId, alias);
+                }
+            }
+        }
         if (!fileName) {
             return NextResponse.json({ status: false, message: "File not found", error: "File not found" }, { status: 404 });
         }

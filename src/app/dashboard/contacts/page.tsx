@@ -184,6 +184,9 @@ export default function ContactListPage() {
                                                 <TableCell>
                                                     <div className="flex flex-col">
                                                         <span className="font-medium">{contact.name || contact.notify || (contact.remoteJidAlt ? `+${contact.remoteJidAlt.split("@")[0]}` : tCommon("unknown"))}</span>
+                                                        {contact.name && contact.notify && contact.notify !== contact.name && (
+                                                            <span className="text-xs text-muted-foreground">~{contact.notify}</span>
+                                                        )}
                                                         {contact.verifiedName && (
                                                             <span className="text-xs text-green-600 flex items-center gap-1">
                                                                 ✓ {contact.verifiedName}
@@ -195,7 +198,7 @@ export default function ContactListPage() {
                                                     {contact.jid}
                                                 </TableCell>
                                                 <TableCell className="hidden md:table-cell text-sm">
-                                                    {contact.remoteJidAlt || "-"}
+                                                    {(contact.remoteJidAlt || (contact.jid.endsWith("@s.whatsapp.net") ? contact.jid : "")).split("@")[0].replace(/^(?=\d)/, "+") || "-"}
                                                 </TableCell>
                                             </TableRow>
                                         ))

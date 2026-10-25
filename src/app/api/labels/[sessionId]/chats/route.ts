@@ -1,4 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
+import { personRows, pickPersonName } from "@/lib/contact-twins";
 import { getAuthenticatedUser, canAccessSession } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
 
@@ -95,14 +96,9 @@ export async function GET(
             chatLabels.map(async (cl) => {
                 let contactName: string | undefined;
                 if (dbSession) {
-                    const contact = await prisma.contact.findFirst({
-                        where: {
-                            sessionId: dbSession.id,
-                            jid: cl.chatJid
-                        },
-                        select: { name: true, notify: true }
-                    });
-                    contactName = contact?.name || contact?.notify || undefined;
+                    const rows = await personRows(dbSession.id, cl.chatJid);
+                    const { name, notify } = pickPersonName(rows);
+                    contactName = name || notify || undefined;
                 }
                 return {
                     id: cl.id,

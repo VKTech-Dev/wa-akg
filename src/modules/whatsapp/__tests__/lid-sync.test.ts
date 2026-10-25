@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { mergeTwinNames, toPhoneJid } from "../store/lid-sync";
+import { mergeTwinNames, pairsFromParticipants, toPhoneJid } from "../store/lid-sync";
 
 describe("toPhoneJid", () => {
     it("drops the device part", () => {
@@ -38,5 +38,22 @@ describe("mergeTwinNames", () => {
 
     it("does nothing when neither side has a name", () => {
         assert.deepEqual(mergeTwinNames({}, {}), { lid: {}, pn: {} });
+    });
+});
+
+describe("pairsFromParticipants", () => {
+    it("keeps entries that carry both ids", () => {
+        const out = pairsFromParticipants([
+            { id: "1@lid", phoneNumber: "5511@s.whatsapp.net", admin: null },
+            { id: "2@s.whatsapp.net", phoneNumber: "5522@s.whatsapp.net" },
+            { id: "3@lid" },
+            null
+        ]);
+        assert.deepEqual(out, [{ lid: "1@lid", pn: "5511@s.whatsapp.net" }]);
+    });
+
+    it("returns nothing for non-arrays", () => {
+        assert.deepEqual(pairsFromParticipants(null), []);
+        assert.deepEqual(pairsFromParticipants({}), []);
     });
 });
