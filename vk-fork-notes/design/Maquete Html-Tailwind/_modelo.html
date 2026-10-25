@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modelo | WA-AKG maquete</title>
+  <!-- 1. CSS compilado do sistema real (tokens, tema escuro, bolhas do chat) -->
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/maquete.css">
+  <!-- 2. Tailwind do navegador: só para as classes novas que você usar ao editar -->
+  <script src="assets/tailwind-browser-4.1.18.js"></script>
+  <script src="assets/tailwind-theme.js"></script>
+  <!-- 3. Tema claro/escuro (chave vk-theme, padrão escuro) -->
+  <script src="app.js"></script>
+</head>
+<body class="bg-background text-foreground antialiased min-h-screen flex">
+
+  <!-- Menu lateral: troque pelo menu real quando for montar a tela -->
+  <aside class="hidden md:flex w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
+    <div class="h-16 flex items-center px-5 font-semibold border-b border-sidebar-border">WA-AKG</div>
+    <nav class="p-3 flex flex-col gap-1 text-sm" aria-label="Menu principal">
+      <a href="index.html" class="px-3 py-2 rounded-lg bg-sidebar-accent text-sidebar-accent-foreground">Dashboard</a>
+      <a href="index.html" class="px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent">Conversas</a>
+      <a href="index.html" class="px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent">Contatos</a>
+    </nav>
+  </aside>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <header class="h-16 flex items-center justify-between px-4 sm:px-6 border-b border-border/50 bg-background/40 backdrop-blur-2xl">
+      <span class="text-sm text-muted-foreground">Sessão 5511900000001</span>
+      <button type="button" data-tema-toggle aria-label="Alternar tema claro/escuro"
+              class="h-10 w-10 rounded-full hover:bg-muted/50 text-muted-foreground">◐</button>
+    </header>
+
+    <main class="flex-1 p-4 sm:p-6">
+      <h1 class="text-3xl font-bold tracking-tight">Título da tela</h1>
+      <p class="text-muted-foreground mt-1">Descrição curta da tela, como no sistema real.</p>
+
+      <section class="mt-6 rounded-2xl border bg-card text-card-foreground p-6 shadow-sm">
+        <h2 class="font-semibold">Cartão de exemplo</h2>
+        <p class="text-sm text-muted-foreground mt-1">Use <code>bg-card</code>, <code>border</code>, <code>text-muted-foreground</code> e <code>bg-primary</code>: são as cores do sistema.</p>
+        <button type="button" class="mt-4 h-9 px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium">Botão primário</button>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>

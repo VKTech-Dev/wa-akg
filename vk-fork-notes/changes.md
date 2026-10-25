@@ -2,6 +2,25 @@
 
 Uma entrada por alteração, da mais nova para a mais antiga. Campos: data, arquivos, motivo, commit.
 
+## 2026-10-25 — Uma pessoa, uma identidade (telefone) em todas as telas
+
+- Arquivos do upstream editados: `src/app/api/contacts/[sessionId]/route.ts` (esconde o `@lid` que tem gêmeo de telefone, busca também pelo nome do gêmeo, foto pela pessoa), `src/modules/whatsapp/chat.service.ts` (nome e foto da lista de conversas pela pessoa; risco de conflito médio), `src/app/api/labels/[sessionId]/chats/route.ts` (nome pela pessoa), `src/app/api/avatars/by-jid/[sessionId]/[jid]/route.ts` (foto por qualquer id da pessoa), `src/app/dashboard/contacts/page.tsx` (pushname como subtítulo, telefone formatado), `src/components/chat/linkify.tsx` e `whatsapp-theme.css` (link azul).
+- Arquivos novos: `src/lib/contact-twins.ts` (`personJids`, `pickPersonName`, `personRows`, `hiddenTwinIds`, `twinPhonesMatching`, `avatarUrlForPerson`), `src/lib/__tests__/contact-twins.test.ts`.
+- `lid-sync.ts` ganhou: telefones vindos dos participantes de grupos (`phoneNumber`, +497 `@lid`), refusão de nomes quando `contacts.update/upsert` chega depois (espera 3 s), e `consolidateByPhone`.
+- `consolidateByPhone` move para o telefone tudo que estava sob um `@lid` de telefone conhecido: `Message.remoteJid`, `Message.senderJid`, `ChatLabel.chatJid`, `ScheduledMessage.jid`. A linha `@lid` do `Contact` continua, só como tradução. Roda a cada conexão e a cada `lid-mapping.update`; é idempotente.
+- Simulação em transação desfeita antes de rodar de verdade: 1542 mensagens e 4590 remetentes movidos; chats distintos 486 -> 485; chats `@lid` 76 -> 0.
+- Backup antes da primeira execução: `dados/backups/antes-unificar-lid-20261025-1213.sql` (Message, ChatLabel, ScheduledMessage, Contact; fora do git). Para desfazer, restaurar essas tabelas desse arquivo.
+- Fora do alcance: 313 contatos sem nome em nenhuma tabela (64 `@lid`, 249 telefone) continuam sem nome; o WhatsApp não os entregou.
+- Commit: pendente.
+
+## 2026-10-25 — Modo escuro e bolhas no estilo WhatsApp
+
+- Arquivos do upstream editados: `src/components/chat/chat-window.tsx` (classes das bolhas, data, citação, hora com tiques de status; removidos `overflow-hidden` e `max-w-3xl` da lista; risco de conflito médio-alto, pois mexe no bloco da mensagem), `src/app/layout.tsx` (1 import e 1 `<script>` no `<head>` que aplica o tema antes do primeiro desenho; baixo), `src/components/dashboard/navbar.tsx` e `mobile-nav.tsx` (1 import e 1 botão cada; baixo), `src/i18n/messages/{pt-BR,en,id}.json` (chave `theme.toggle`; baixo).
+- Arquivos novos: `src/lib/theme.ts`, `src/lib/__tests__/theme.test.ts`, `src/components/theme-toggle.tsx`, `src/components/chat/whatsapp-theme.css`.
+- Motivo: o CSS já tinha as cores `.dark`, mas nada ligava a classe, então o app ficava sempre claro. Agora o padrão é escuro, o botão sol/lua na barra alterna e a escolha fica no `localStorage` (`vk-theme`). As bolhas seguem o WhatsApp: verde à direita, cinza-escuro à esquerda, rabinho na primeira de cada sequência, hora com tiques (enviada, entregue, lida em azul) dentro da bolha. Todas as cores do chat ficam em variáveis `--wa-*` no CSS novo, para trocar num lugar só.
+- Não verificado visualmente: só `tsc` e testes.
+- Commit: pendente.
+
 ## 2026-10-25 — `.dockerignore` ignora dados de execução
 
 - Arquivo do upstream editado: `.dockerignore` (linhas `dados` e `data`).
@@ -61,6 +80,14 @@ Uma entrada por alteração, da mais nova para a mais antiga. Campos: data, arqu
 - Arquivos novos: `vk-fork-notes/`, `AGENTS.md`.
 - Motivo: registrar o histórico do fork.
 - Risco de conflito: nenhum (arquivos inexistentes no upstream).
+
+## 2026-10-25 — Mídia de grupo não era baixada
+
+- Arquivos do upstream editados: `src/lib/webhook.ts` (`downloadAndSaveMedia` usa `findMediaMessageType` em vez de `Object.keys(...)[0]`, 3 linhas, risco de conflito baixo).
+- Arquivos novos: `src/lib/media-type.ts`, `src/lib/__tests__/media-type.test.ts`.
+- `.dockerignore`: linha `vk-fork-notes`. O `front-clone` (maquete do Gemini) estava entrando no `tsc` do `next build` e quebrava o build da imagem.
+- Motivo: a função tratava a primeira chave do conteúdo como o tipo; quando `messageContextInfo` vem antes de `imageMessage`, saía sem tentar baixar e a mensagem ficava com `mediaUrl` nulo. Causa ainda a confirmar com mensagens novas após o rebuild. Mídia antiga sem URL não tem como ser recuperada (a chave da mídia não é guardada).
+- Commit: pendente (aguardando aprovação do usuário).
 
 ## Pendente (ideias, nada feito)
 

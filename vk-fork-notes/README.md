@@ -8,6 +8,7 @@ Registro do fork VKTech-Dev/wa-akg em relação ao upstream (mrifqidaffaaditya/W
 | `changes.md` | O que mudamos em relação ao upstream |
 | `upstream-log.md` | O que cada atualização do upstream trouxe e como foi resolvida |
 | `upstream-sync.md` | Passo a passo para atualizar |
+| `design/` | Maquete visual (HTML + Tailwind) do front. Leia `design/AGENTS.md` |
 
 ## Regras
 

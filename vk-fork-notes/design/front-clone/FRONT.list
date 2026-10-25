@@ -1,0 +1,22 @@
+# O que é front: vem do projeto real (atualizar-do-projeto.sh) e volta para ele (levar-para-projeto.sh).
+# Caminhos relativos à raiz do projeto wa-akg. Uma linha por pasta ou arquivo.
+src/app/dashboard/
+src/app/auth/
+src/app/privacy/
+src/app/terms/
+src/app/error/
+src/app/layout.tsx
+src/app/page.tsx
+src/app/not-found.tsx
+src/app/error.tsx
+src/app/global-error.tsx
+src/app/globals.css
+src/app/icon.tsx
+src/components/
+src/i18n/
+src/lib/utils.ts
+src/lib/theme.ts
+src/lib/client-cookie.ts
+public/
+postcss.config.mjs
+components.json

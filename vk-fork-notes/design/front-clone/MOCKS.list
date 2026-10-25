@@ -1,0 +1,16 @@
+# Camada simulada: existe SÓ no clone e NUNCA vai para o projeto real.
+# Os arquivos abaixo que também estão em FRONT.list (as server actions) não são sobrescritos pela sincronização.
+# Caminhos relativos à raiz do clone.
+src/app/dashboard/chat/actions.ts
+src/app/dashboard/autoreply/actions.ts
+src/lib/auth.ts
+src/lib/api-auth.ts
+src/lib/prisma.ts
+src/lib/server-action-auth.ts
+src/modules/whatsapp/chat.service.ts
+src/mocks/
+src/app/api/
+package.json
+next.config.ts
+tsconfig.json
+scripts/

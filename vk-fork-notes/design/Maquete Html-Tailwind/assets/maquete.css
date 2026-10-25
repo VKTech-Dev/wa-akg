@@ -1,0 +1,12 @@
+/* Só o que o Next injeta em tempo de execução e a maquete precisa recriar. */
+:root {
+  --font-geist-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+body { font-family: var(--font-geist-sans); }
+
+/* Link azul do chat. O app.css é do último build e ainda não tem isto; vem de src/components/chat/whatsapp-theme.css.
+   Quando o app.css for recopiado de um build novo, estas linhas podem sair. */
+.wa-chat { --wa-link: #027eb5; }
+.dark .wa-chat { --wa-link: #53bdeb; }
+.wa-chat .wa-link { color: var(--wa-link); word-break: break-all; }

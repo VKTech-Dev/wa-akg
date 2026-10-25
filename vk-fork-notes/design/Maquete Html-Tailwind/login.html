@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar | WA-AKG maquete</title>
+  <!-- 1. CSS compilado do sistema real (tokens, tema escuro, bolhas do chat) -->
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/maquete.css">
+  <!-- 2. Tailwind do navegador: só para as classes novas que você usar ao editar -->
+  <script src="assets/tailwind-browser-4.1.18.js"></script>
+  <script src="assets/tailwind-theme.js"></script>
+  <!-- 3. Tema claro/escuro (chave vk-theme, padrão escuro) -->
+  <script src="app.js"></script>
+</head>
+<body class="bg-background text-foreground antialiased min-h-screen flex items-center justify-center p-4 relative">
+
+  <!-- Elementos de fundo decorativos contidos sem estourar a tela -->
+  <div class="fixed inset-0 pointer-events-none" aria-hidden="true" style="background: radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.15), transparent 45%), radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.15), transparent 45%);"></div>
+
+  <!-- Controles de topo: Idioma e Tema -->
+  <header class="absolute top-4 right-4 z-20 flex items-center gap-2">
+    <div class="flex items-center rounded-xl bg-muted/60 p-1 border border-border/40 text-xs font-medium">
+      <span class="px-2.5 py-1.5 rounded-lg bg-background text-foreground shadow-sm">PT</span>
+      <span class="px-2.5 py-1.5 text-muted-foreground">EN</span>
+      <span class="px-2.5 py-1.5 text-muted-foreground">ID</span>
+    </div>
+    <button type="button" data-tema-toggle aria-label="Alternar tema claro/escuro"
+            class="h-10 w-10 rounded-xl bg-muted/60 border border-border/40 hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors">◐</button>
+  </header>
+
+  <!-- Painel central de login -->
+  <main class="relative z-10 w-full max-w-md my-auto">
+    <div class="flex flex-col items-center mb-6 text-center">
+      <div class="h-16 w-16 mb-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-primary text-white flex items-center justify-center shadow-lg shadow-primary/30">
+        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a2 2 0 012 2v2a2 2 0 01-2 2 2 2 0 01-2-2V4a2 2 0 012-2zM4 11a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7zM9 16h6" />
+        </svg>
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Bem-vindo de volta</h1>
+      <p class="text-muted-foreground mt-2 text-sm">Entre na sua conta WA-AKG</p>
+    </div>
+
+    <div class="glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl border border-border/50 bg-card/70 backdrop-blur-xl">
+      <form action="dashboard.html" method="get" class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-medium text-foreground mb-1.5">E-mail</label>
+          <input id="email" type="email" name="email" required placeholder="nome@exemplo.com" value="admin@vktech.dev"
+                 class="w-full h-12 px-4 rounded-xl bg-background/60 border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm font-medium transition-all">
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label for="password" class="block text-sm font-medium text-foreground">Senha</label>
+          </div>
+          <input id="password" type="password" name="password" required placeholder="••••••••" value="segredo123"
+                 class="w-full h-12 px-4 rounded-xl bg-background/60 border border-border/60 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm font-medium transition-all">
+        </div>
+
+        <button type="submit"
+                class="w-full h-12 rounded-xl bg-primary text-primary-foreground font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-primary/35 flex items-center justify-center gap-2 transition-all mt-6 cursor-pointer">
+          <span>Entrar</span>
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <p class="mt-6 text-center text-sm text-muted-foreground">
+      Não tem uma conta? <a href="login.html" class="font-semibold text-primary hover:underline">Criar uma conta</a>
+    </p>
+  </main>
+
+</body>
+</html>

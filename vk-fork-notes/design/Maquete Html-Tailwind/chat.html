@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conversas | WA-AKG maquete</title>
+  <!-- 1. CSS compilado do sistema real (tokens, tema escuro, bolhas do chat) -->
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/maquete.css">
+  <!-- 2. Tailwind do navegador: só para as classes novas que você usar ao editar -->
+  <script src="assets/tailwind-browser-4.1.18.js"></script>
+  <script src="assets/tailwind-theme.js"></script>
+  <!-- 3. Tema claro/escuro (chave vk-theme, padrão escuro) -->
+  <script src="app.js"></script>
+</head>
+<body class="bg-background text-foreground antialiased min-h-screen flex">
+
+  <!-- Menu lateral desktop -->
+  <aside class="hidden md:flex w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground sticky top-0 h-screen">
+    <!-- Brand -->
+    <div class="h-16 flex items-center px-5 border-b border-sidebar-border gap-2.5">
+      <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+        W
+      </div>
+      <div>
+        <div class="font-bold text-base leading-none text-sidebar-foreground">WA-AKG</div>
+        <p class="text-[10px] text-muted-foreground mt-0.5 font-medium">Gateway de WhatsApp</p>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="flex-1 p-3 overflow-y-auto space-y-4 text-xs" aria-label="Menu principal">
+      <!-- Grupo Principal -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Principal</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Painel</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path><rect x="7" y="7" width="10" height="10"></rect></svg>
+            <span>Sessões / QR</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Mensagens -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Mensagens</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="chat.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-sidebar-accent text-sidebar-accent-foreground font-semibold">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Chat</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+            <span>Transmissão</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+            <span>Testador Interativo</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+            <span>Criador de Figurinhas</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Contatos -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Contatos</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="contatos.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+            <span>Contatos</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Grupos</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>
+            <span>Etiquetas</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Automação -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Automação</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+            <span>Configurações do Bot</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 17l-5-5 5-5"></path><path d="M20 18v-2a4 4 0 0 0-4-4H4"></path></svg>
+            <span>Resposta Automática</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+            <span>Perfil do Bot</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><circle cx="18" cy="18" r="4"></circle><path d="M18 16.5V18l1 1"></path></svg>
+            <span>Agendador</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c0-2.21 1.79-4 4-4h5.99c1.1 0 1.95-.94 2.48-1.9A4 4 0 0 1 22 13c0 2.21-1.79 4-4 4Z"></path></svg>
+            <span>Webhooks e API</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Desenvolvedor -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Desenvolvedor</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>Documentação da API</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            <span>Swagger UI</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Administração -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Administração</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"></line><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" x2="6.01" y1="16" y2="16"></line><line x1="10" x2="10.01" y1="16" y2="16"></line></svg>
+            <span>Gerenciador de Mídia</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Configurações</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Rodapé Usuário -->
+    <div class="border-t border-sidebar-border p-3 bg-sidebar/50">
+      <div class="flex items-center gap-2.5 mb-2">
+        <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center text-xs font-bold text-primary border border-primary/20">
+          U
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-sidebar-foreground truncate">Administrador VK</p>
+          <p class="text-[10px] text-muted-foreground truncate">admin@vktech.dev</p>
+        </div>
+      </div>
+      <a href="login.html" class="w-full h-8 flex items-center justify-center gap-1.5 text-xs rounded-lg border border-sidebar-border hover:bg-destructive/10 hover:text-destructive transition-colors">
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+        <span>Sair</span>
+      </a>
+      <p class="text-[9px] text-muted-foreground/50 text-center mt-2 font-mono">v1.0.0</p>
+    </div>
+  </aside>
+
+  <!-- Conteúdo Principal -->
+  <div class="flex-1 min-w-0 flex flex-col h-screen overflow-hidden">
+    <!-- Navbar do topo -->
+    <header class="h-16 shrink-0 flex items-center justify-between px-4 sm:px-6 border-b border-border/50 bg-background/80 backdrop-blur-md z-30">
+      <div class="flex items-center gap-3">
+        <span class="md:hidden font-bold text-base text-primary">WA-AKG</span>
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 border border-border/40 text-xs">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span class="font-medium text-foreground">Sessão: 5511900000001</span>
+          <span class="text-muted-foreground">(Conectada)</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="hidden sm:inline text-xs text-muted-foreground font-mono">12:54</span>
+        <div class="flex items-center rounded-lg bg-muted/50 p-0.5 border border-border/30 text-xs">
+          <span class="px-2 py-1 rounded bg-background text-foreground font-medium shadow-sm">PT</span>
+          <span class="px-2 py-1 text-muted-foreground">EN</span>
+        </div>
+        <button type="button" aria-label="Notificações"
+                class="relative h-10 w-10 rounded-full hover:bg-muted/50 text-muted-foreground flex items-center justify-center">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="absolute top-2 right-2 h-2 w-2 bg-blue-500 rounded-full"></span>
+        </button>
+        <button type="button" data-tema-toggle aria-label="Alternar tema claro/escuro"
+                class="h-10 w-10 rounded-full hover:bg-muted/50 text-muted-foreground flex items-center justify-center transition-colors">◐</button>
+      </div>
+    </header>
+
+    <!-- Área principal do chat: layout dividido -->
+    <main class="flex-1 min-h-0 flex flex-col p-2 sm:p-4 lg:p-6 bg-background">
+      <div class="flex-1 min-h-0 flex rounded-2xl border border-border/50 bg-card overflow-hidden shadow-sm">
+        
+        <!-- Painel 1: Lista de conversas -->
+        <section aria-labelledby="titulo-conversas-lista" id="painel-lista-conversas" class="w-full md:w-80 lg:w-[340px] shrink-0 border-r border-border/40 flex flex-col bg-background hidden md:flex">
+          <!-- Cabeçalho da lista -->
+          <div class="p-3 border-b border-border/40 space-y-3">
+            <div class="flex items-center justify-between">
+              <h1 id="titulo-conversas-lista" class="text-base font-semibold text-foreground flex items-center gap-1.5">
+                <span>Conversas</span>
+                <span class="text-xs font-normal text-muted-foreground">(8)</span>
+              </h1>
+              <button type="button" aria-label="Nova conversa" class="h-9 w-9 rounded-xl hover:bg-muted/60 text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line><line x1="12" y1="7" x2="12" y2="13"></line></svg>
+              </button>
+            </div>
+
+            <!-- Campo de busca -->
+            <div class="relative">
+              <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="search" placeholder="Pesquisar conversas..." aria-label="Pesquisar conversas"
+                     class="w-full h-8 pl-8 pr-3 rounded-lg bg-muted/50 border-0 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary font-medium">
+            </div>
+
+            <!-- Abas de filtro -->
+            <div role="tablist" aria-label="Filtrar conversas" class="flex gap-1 p-0.5 bg-muted/50 rounded-lg">
+              <button type="button" role="tab" aria-selected="true" class="flex-1 h-7 rounded-md text-xs font-medium bg-background text-foreground shadow-sm">Todas</button>
+              <button type="button" role="tab" aria-selected="false" class="flex-1 h-7 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground">Conversas</button>
+              <button type="button" role="tab" aria-selected="false" class="flex-1 h-7 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground">Grupos</button>
+            </div>
+          </div>
+
+          <!-- Itens da lista de conversas -->
+          <div class="flex-1 overflow-y-auto divide-y divide-border/20" role="list">
+            <!-- Item 1 (Ativo: Mariana Costa) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 border-l-2 border-l-primary cursor-pointer">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500/20 to-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0 border border-primary/20">
+                MC
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-semibold text-primary truncate flex items-center gap-1.5">
+                    <span>Mariana Costa</span>
+                    <span class="h-2 w-2 rounded-full bg-emerald-500 shrink-0" title="Etiqueta: Atendimento"></span>
+                  </h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">12:45</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">Com certeza, combinamos às 15h!</p>
+              </div>
+            </div>
+
+            <!-- Item 2 (Grupo: Equipe de Operações VK) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 text-indigo-500 flex items-center justify-center font-bold text-xs shrink-0 border border-indigo-500/20">
+                EO
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-medium text-foreground truncate flex items-center gap-1.5">
+                    <span>Equipe de Operações VK</span>
+                    <span class="h-2 w-2 rounded-full bg-blue-500 shrink-0" title="Etiqueta: Interno"></span>
+                    <span class="h-2 w-2 rounded-full bg-amber-500 shrink-0" title="Etiqueta: Pendente"></span>
+                  </h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">12:10</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">Lucas: Servidor atualizado sem instabilidades.</p>
+              </div>
+            </div>
+
+            <!-- Item 3 (Canal: Novidades WA-AKG) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-500 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-500/20">
+                NW
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-medium text-foreground truncate">Novidades WA-AKG</h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">11:30</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">Nova versão 1.1.0 disponível para testes.</p>
+              </div>
+            </div>
+
+            <!-- Item 4 (Carlos Eduardo Silva - Imagem) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-primary/20 text-emerald-500 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-500/20">
+                CS
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-medium text-foreground truncate">Carlos Eduardo Silva</h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">10:15</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">📎 Imagem</p>
+              </div>
+            </div>
+
+            <!-- Item 5 (Beatriz Alencar - Citação) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 text-purple-500 flex items-center justify-center font-bold text-xs shrink-0 border border-purple-500/20">
+                BA
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-medium text-foreground truncate flex items-center gap-1.5">
+                    <span>Beatriz Alencar</span>
+                    <span class="h-2 w-2 rounded-full bg-pink-500 shrink-0" title="Etiqueta: VIP"></span>
+                  </h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">09:40</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">Vou verificar aquele ponto que você citou.</p>
+              </div>
+            </div>
+
+            <!-- Item 6 (Rodrigo Martins - Link) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0 border border-amber-500/20">
+                RM
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-medium text-foreground truncate flex items-center gap-1">
+                    <span>Rodrigo Martins</span>
+                    <span class="text-[10px] text-emerald-500">✓</span>
+                  </h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">Ontem</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">Acesse a documentação do projeto.</p>
+              </div>
+            </div>
+
+            <!-- Item 7 (Fernanda Lima - LID) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-rose-500/20 to-red-500/20 text-rose-500 flex items-center justify-center font-bold text-xs shrink-0 border border-rose-500/20">
+                FL
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-medium text-foreground truncate">Fernanda Lima</h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">Ontem</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">Obrigada pelo retorno rápido!</p>
+              </div>
+            </div>
+
+            <!-- Item 8 (Lucas Pinheiro) -->
+            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+              <div class="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground font-bold text-xs shrink-0 border border-border/40">
+                LP
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline gap-1">
+                  <h2 class="text-sm font-medium text-foreground truncate">Lucas Pinheiro</h2>
+                  <span class="text-[10px] text-muted-foreground shrink-0">23 out</span>
+                </div>
+                <p class="text-xs text-muted-foreground truncate mt-0.5">Tudo certo para a reunião.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 2: Janela da conversa aberta (WhatsApp style) -->
+        <section aria-labelledby="titulo-conversa-ativa" id="painel-janela-chat" class="flex-1 min-w-0 flex flex-col bg-background">
+          <!-- Cabeçalho do contato atual -->
+          <div class="h-16 shrink-0 px-3 sm:px-4 border-b border-border/40 flex items-center justify-between bg-card/60 backdrop-blur-sm z-10">
+            <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+              <!-- Botão voltar no celular -->
+              <a href="chat.html" aria-label="Voltar para a lista de conversas" class="md:hidden h-10 w-10 flex items-center justify-center rounded-xl hover:bg-muted text-muted-foreground shrink-0">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+              </a>
+
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500/20 to-primary/20 text-primary flex items-center justify-center font-bold text-sm shrink-0 border border-primary/20">
+                MC
+              </div>
+
+              <div class="min-w-0">
+                <h2 id="titulo-conversa-ativa" class="text-sm font-semibold text-foreground truncate">Mariana Costa</h2>
+                <p class="text-[10px] text-muted-foreground font-mono truncate">5511900000001@s.whatsapp.net</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1">
+              <button type="button" aria-label="Pesquisar na conversa" class="h-10 w-10 rounded-xl hover:bg-muted/60 text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              </button>
+              <button type="button" aria-label="Mais opções da conversa" class="h-10 w-10 rounded-xl hover:bg-muted/60 text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Área de mensagens com fundo .wa-chat -->
+          <div class="wa-chat flex-1 overflow-y-auto px-3 sm:px-6 py-4 space-y-2">
+            
+            <!-- Pílula de início -->
+            <div class="flex justify-center my-2">
+              <span class="wa-pill">Início da conversa</span>
+            </div>
+
+            <!-- Pílula de data Ontem -->
+            <div class="flex justify-center my-3">
+              <span class="wa-pill">Ontem</span>
+            </div>
+
+            <!-- Msg 1 (Recebida) -->
+            <div class="flex justify-start">
+              <div class="wa-bubble wa-bubble-in wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <p class="text-[14.2px] leading-[19px]">Olá! Tudo bem? Como está o andamento da nova versão do gateway?</p>
+                <span class="wa-meta self-end mt-1">16:20</span>
+              </div>
+            </div>
+
+            <!-- Msg 2 (Enviada com tique READ via SVG) -->
+            <div class="flex justify-end">
+              <div class="wa-bubble wa-bubble-out wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <p class="text-[14.2px] leading-[19px]">Olá Mariana! Estamos finalizando a maquete visual e os testes dos módulos.</p>
+                <span class="wa-meta self-end mt-1 !text-emerald-950/85 dark:!text-emerald-100">
+                  <span>16:22</span>
+                  <svg class="h-3.5 w-3.5 wa-read inline-flex ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true" title="Status: READ"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12l5 5L20 6M9 12l5 5L20 6" /></svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Pílula de data Hoje -->
+            <div class="flex justify-center my-3">
+              <span class="wa-pill">Hoje</span>
+            </div>
+
+            <!-- Msg 3 (Recebida com LINK clicável) -->
+            <div class="flex justify-start">
+              <div class="wa-bubble wa-bubble-in wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <p class="text-[14.2px] leading-[19px]">
+                  Excelente! Você já pode conferir a documentação no link:
+                  <a href="https://wa-akg.vktech.dev/docs" class="wa-link underline" target="_blank" rel="noopener noreferrer">https://wa-akg.vktech.dev/docs</a>
+                </p>
+                <span class="wa-meta self-end mt-1">09:10</span>
+              </div>
+            </div>
+
+            <!-- Msg 4 (Enviada com resposta) -->
+            <div class="flex justify-end">
+              <div class="wa-bubble wa-bubble-out wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <p class="text-[14.2px] leading-[19px]">
+                  Perfeito! O backend e as rotas de avatares já foram completamente integrados.
+                </p>
+                <span class="wa-meta self-end mt-1 !text-emerald-950/85 dark:!text-emerald-100">
+                  <span>09:12</span>
+                  <svg class="h-3.5 w-3.5 wa-read inline-flex ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true" title="Status: READ"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12l5 5L20 6M9 12l5 5L20 6" /></svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Msg 5 (Recebida com CITAÇÃO) -->
+            <div class="flex justify-start">
+              <div class="wa-bubble wa-bubble-in wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <div class="wa-quote mb-1.5 px-2 py-1 rounded-md text-xs">
+                  <span class="font-semibold block text-[10px] text-blue-500">Você</span>
+                  <span class="line-clamp-2 block text-muted-foreground text-xs">Perfeito! O backend e as rotas de avatares já foram completamente integrados.</span>
+                </div>
+                <p class="text-[14.2px] leading-[19px]">Muito bom, vou alinhar com a equipe para homologar!</p>
+                <span class="wa-meta self-end mt-1">09:15</span>
+              </div>
+            </div>
+
+            <!-- Msg 6 (Enviada com IMAGEM e tique DELIVERED) -->
+            <div class="flex justify-end">
+              <div class="wa-bubble wa-bubble-out wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <div class="rounded-xl overflow-hidden mb-1.5 bg-black/25 p-3 border border-white/10 flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-2">
+                    <svg class="h-6 w-6 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                    <span class="text-xs font-semibold">arquitetura-gateway.png</span>
+                  </div>
+                  <button type="button" aria-label="Baixar arquitetura-gateway.png" class="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white shrink-0 transition-colors">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  </button>
+                </div>
+                <p class="text-[14.2px] leading-[19px]">Aqui está o diagrama da arquitetura dos novos webhooks.</p>
+                <span class="wa-meta self-end mt-1 !text-emerald-950/85 dark:!text-emerald-100">
+                  <span>09:18</span>
+                  <svg class="h-3.5 w-3.5 inline-flex ml-0.5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true" title="Status: DELIVERED"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12l5 5L20 6M9 12l5 5L20 6" /></svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Msg 7 (Recebida com ÁUDIO) -->
+            <div class="flex justify-start">
+              <div class="wa-bubble wa-bubble-in wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <div class="flex items-center gap-3 py-1 px-1">
+                  <button type="button" aria-label="Reproduzir áudio" class="h-10 w-10 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center shrink-0">
+                    <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  </button>
+                  <div class="flex-1 min-w-[120px]">
+                    <div class="h-1.5 w-full bg-muted-foreground/30 rounded-full overflow-hidden">
+                      <div class="h-full w-1/3 bg-emerald-500 rounded-full"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-muted-foreground mt-1">
+                      <span>0:08</span>
+                      <span>0:24</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="wa-meta self-end mt-0.5">09:25</span>
+              </div>
+            </div>
+
+            <!-- Msg 8 (Recebida continuação) -->
+            <div class="flex justify-start">
+              <div class="wa-bubble wa-bubble-in max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <p class="text-[14.2px] leading-[19px]">Ouvi os detalhes, ficou bem claro. Vamos agendar uma validação prática?</p>
+                <span class="wa-meta self-end mt-1">09:26</span>
+              </div>
+            </div>
+
+            <!-- Msg 9 (Enviada com DOCUMENTO e tique SENT) -->
+            <div class="flex justify-end">
+              <div class="wa-bubble wa-bubble-out wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <div class="flex items-center justify-between gap-3 py-2 px-2.5 rounded-lg bg-white/15 mb-1.5 border border-white/10">
+                  <div class="flex items-center gap-2 truncate min-w-0">
+                    <svg class="h-5 w-5 text-white/80 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    <span class="text-xs font-semibold truncate">relatorio-latencia.pdf</span>
+                  </div>
+                  <button type="button" aria-label="Baixar relatorio-latencia.pdf" class="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white shrink-0 transition-colors">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  </button>
+                </div>
+                <p class="text-[14.2px] leading-[19px]">Segue em anexo o relatório comparativo de latência dos envios.</p>
+                <span class="wa-meta self-end mt-1 !text-emerald-950/85 dark:!text-emerald-100">
+                  <span>10:00</span>
+                  <svg class="h-3.5 w-3.5 inline-flex ml-0.5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true" title="Status: SENT"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Msg 10 (Recebida FIGURINHA) -->
+            <div class="flex justify-start">
+              <div class="wa-bubble wa-bubble-in wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col bg-transparent shadow-none p-1">
+                <div class="text-5xl my-1" aria-label="Figurinha legal">👍</div>
+                <span class="wa-meta self-end">10:05</span>
+              </div>
+            </div>
+
+            <!-- Msg 11 (Recebida) -->
+            <div class="flex justify-start">
+              <div class="wa-bubble wa-bubble-in wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <p class="text-[14.2px] leading-[19px]">Ótimo! Às 15h fica bom para vocês?</p>
+                <span class="wa-meta self-end mt-1">12:44</span>
+              </div>
+            </div>
+
+            <!-- Msg 12 (Enviada com STATUS PENDING - relógio) -->
+            <div class="flex justify-end">
+              <div class="wa-bubble wa-bubble-out wa-tail max-w-[85%] sm:max-w-[65%] flex flex-col">
+                <p class="text-[14.2px] leading-[19px]">Com certeza, combinamos às 15h!</p>
+                <span class="wa-meta self-end mt-1 !text-emerald-950/85 dark:!text-emerald-100">
+                  <span>12:45</span>
+                  <svg class="h-3 w-3 inline-flex text-muted-foreground ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" title="Status: PENDING"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Barra inferior de digitação e envio -->
+          <div class="shrink-0 p-3 bg-card/80 border-t border-border/40 backdrop-blur-sm">
+            <div class="flex items-center gap-2 max-w-4xl mx-auto">
+              <!-- Botão Anexar -->
+              <button type="button" aria-label="Anexar arquivo"
+                      class="h-10 w-10 rounded-full hover:bg-muted/70 text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors shrink-0">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+              </button>
+
+              <!-- Botão Interativo -->
+              <button type="button" aria-label="Mensagens interativas"
+                      class="h-10 w-10 rounded-full hover:bg-amber-500/10 text-amber-500 flex items-center justify-center transition-colors shrink-0">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+              </button>
+
+              <!-- Campo de texto -->
+              <div class="flex-1 min-w-0">
+                <input type="text" placeholder="Digite uma mensagem..." aria-label="Digite uma mensagem"
+                       class="w-full h-10 px-4 rounded-2xl bg-background border border-border/50 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary font-medium">
+              </div>
+
+              <!-- Botão Enviar -->
+              <button type="button" aria-label="Enviar mensagem"
+                      class="h-10 w-10 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center shadow-md transition-all shrink-0 cursor-pointer">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contatos | WA-AKG maquete</title>
+  <!-- 1. CSS compilado do sistema real (tokens, tema escuro, bolhas do chat) -->
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/maquete.css">
+  <!-- 2. Tailwind do navegador: só para as classes novas que você usar ao editar -->
+  <script src="assets/tailwind-browser-4.1.18.js"></script>
+  <script src="assets/tailwind-theme.js"></script>
+  <!-- 3. Tema claro/escuro (chave vk-theme, padrão escuro) -->
+  <script src="app.js"></script>
+</head>
+<body class="bg-background text-foreground antialiased min-h-screen flex">
+
+  <!-- Menu lateral desktop -->
+  <aside class="hidden md:flex w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground sticky top-0 h-screen">
+    <!-- Brand -->
+    <div class="h-16 flex items-center px-5 border-b border-sidebar-border gap-2.5">
+      <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+        W
+      </div>
+      <div>
+        <div class="font-bold text-base leading-none text-sidebar-foreground">WA-AKG</div>
+        <p class="text-[10px] text-muted-foreground mt-0.5 font-medium">Gateway de WhatsApp</p>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="flex-1 p-3 overflow-y-auto space-y-4 text-xs" aria-label="Menu principal">
+      <!-- Grupo Principal -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Principal</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Painel</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path><rect x="7" y="7" width="10" height="10"></rect></svg>
+            <span>Sessões / QR</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Mensagens -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Mensagens</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="chat.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Chat</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+            <span>Transmissão</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+            <span>Testador Interativo</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+            <span>Criador de Figurinhas</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Contatos -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Contatos</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="contatos.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-sidebar-accent text-sidebar-accent-foreground font-semibold">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+            <span>Contatos</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Grupos</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>
+            <span>Etiquetas</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Automação -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Automação</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+            <span>Configurações do Bot</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 17l-5-5 5-5"></path><path d="M20 18v-2a4 4 0 0 0-4-4H4"></path></svg>
+            <span>Resposta Automática</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+            <span>Perfil do Bot</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"></path><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path><circle cx="18" cy="18" r="4"></circle><path d="M18 16.5V18l1 1"></path></svg>
+            <span>Agendador</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c0-2.21 1.79-4 4-4h5.99c1.1 0 1.95-.94 2.48-1.9A4 4 0 0 1 22 13c0 2.21-1.79 4-4 4Z"></path></svg>
+            <span>Webhooks e API</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Desenvolvedor -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Desenvolvedor</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>Documentação da API</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            <span>Swagger UI</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grupo Administração -->
+      <div>
+        <p class="px-3 py-1 font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Administração</p>
+        <div class="mt-1 space-y-0.5">
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"></line><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" x2="6.01" y1="16" y2="16"></line><line x1="10" x2="10.01" y1="16" y2="16"></line></svg>
+            <span>Gerenciador de Mídia</span>
+          </a>
+          <a href="dashboard.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Configurações</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Rodapé Usuário -->
+    <div class="border-t border-sidebar-border p-3 bg-sidebar/50">
+      <div class="flex items-center gap-2.5 mb-2">
+        <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center text-xs font-bold text-primary border border-primary/20">
+          U
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-semibold text-sidebar-foreground truncate">Administrador VK</p>
+          <p class="text-[10px] text-muted-foreground truncate">admin@vktech.dev</p>
+        </div>
+      </div>
+      <a href="login.html" class="w-full h-8 flex items-center justify-center gap-1.5 text-xs rounded-lg border border-sidebar-border hover:bg-destructive/10 hover:text-destructive transition-colors">
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+        <span>Sair</span>
+      </a>
+      <p class="text-[9px] text-muted-foreground/50 text-center mt-2 font-mono">v1.0.0</p>
+    </div>
+  </aside>
+
+  <!-- Conteúdo Principal -->
+  <div class="flex-1 min-w-0 flex flex-col min-h-screen">
+    <!-- Navbar do topo -->
+    <header class="h-16 flex items-center justify-between px-4 sm:px-6 border-b border-border/50 bg-background/80 backdrop-blur-md sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <span class="md:hidden font-bold text-base text-primary">WA-AKG</span>
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 border border-border/40 text-xs">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span class="font-medium text-foreground">Sessão: 5511900000001</span>
+          <span class="text-muted-foreground">(Conectada)</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="hidden sm:inline text-xs text-muted-foreground font-mono">12:54</span>
+        <div class="flex items-center rounded-lg bg-muted/50 p-0.5 border border-border/30 text-xs">
+          <span class="px-2 py-1 rounded bg-background text-foreground font-medium shadow-sm">PT</span>
+          <span class="px-2 py-1 text-muted-foreground">EN</span>
+        </div>
+        <button type="button" aria-label="Notificações"
+                class="relative h-10 w-10 rounded-full hover:bg-muted/50 text-muted-foreground flex items-center justify-center">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="absolute top-2 right-2 h-2 w-2 bg-blue-500 rounded-full"></span>
+        </button>
+        <button type="button" data-tema-toggle aria-label="Alternar tema claro/escuro"
+                class="h-10 w-10 rounded-full hover:bg-muted/50 text-muted-foreground flex items-center justify-center transition-colors">◐</button>
+      </div>
+    </header>
+
+    <!-- Conteúdo da página -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl w-full mx-auto">
+      <!-- Cabeçalho -->
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Contatos</h1>
+        <p class="text-sm text-muted-foreground mt-1">Visualize e gerencie contatos sincronizados do WhatsApp.</p>
+      </div>
+
+      <!-- Cartão com a lista de contatos -->
+      <section aria-labelledby="titulo-lista-contatos" class="glass-panel border border-border/50 rounded-2xl bg-card/60 shadow-sm overflow-hidden">
+        <div class="p-4 sm:p-6 border-b border-border/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 id="titulo-lista-contatos" class="text-base font-semibold text-foreground">Lista de Contatos</h2>
+            <p class="text-xs text-muted-foreground mt-0.5">Total: 10 contatos encontrados</p>
+          </div>
+
+          <!-- Filtros de paginação e busca -->
+          <div class="flex items-center gap-3 w-full md:w-auto">
+            <select aria-label="Contatos por página" class="h-10 px-3 rounded-xl bg-background border border-border/60 text-xs font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shrink-0">
+              <option value="10">10 / página</option>
+              <option value="25">25 / página</option>
+              <option value="50">50 / página</option>
+              <option value="100">100 / página</option>
+              <option value="all">Mostrar Todos</option>
+            </select>
+
+            <div class="relative flex-1 md:w-64">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="search" placeholder="Pesquisar contatos..." aria-label="Pesquisar contatos"
+                     class="w-full h-10 pl-9 pr-3 rounded-xl bg-background border border-border/60 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary font-medium">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela responsiva com rolagem horizontal controlada -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <caption class="sr-only">Tabela de contatos sincronizados</caption>
+            <thead class="bg-muted/40 text-xs font-semibold text-muted-foreground uppercase tracking-wider border-b border-border/50">
+              <tr>
+                <th scope="col" class="py-3 px-4 w-16">Foto</th>
+                <th scope="col" class="py-3 px-4">Nome / Pushname</th>
+                <th scope="col" class="py-3 px-4 hidden md:table-cell">JID (ID)</th>
+                <th scope="col" class="py-3 px-4 hidden sm:table-cell">Telefone / Alt</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border/40 text-xs sm:text-sm">
+              <!-- Contato 1 -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-blue-500/20 to-primary/20 text-primary flex items-center justify-center font-bold text-xs border border-primary/20">
+                    MC
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Mariana Costa</span>
+                    <span class="text-xs text-muted-foreground">~Mari Costa</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000001@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000001</td>
+              </tr>
+
+              <!-- Contato 2 -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-500 flex items-center justify-center font-bold text-xs border border-emerald-500/20">
+                    CS
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Carlos Eduardo Silva</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000002@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000002</td>
+              </tr>
+
+              <!-- Contato 3 -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-purple-500/20 to-indigo-500/20 text-purple-500 flex items-center justify-center font-bold text-xs border border-purple-500/20">
+                    BA
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Beatriz Alencar</span>
+                    <span class="text-xs text-muted-foreground">~Bia Alencar</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000003@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000003</td>
+              </tr>
+
+              <!-- Contato 4 (com selo verificado) -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 text-amber-500 flex items-center justify-center font-bold text-xs border border-amber-500/20">
+                    RM
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Rodrigo Martins</span>
+                    <span class="text-xs text-emerald-500 flex items-center gap-1 font-medium">✓ Suporte Oficial VK</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000004@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000004</td>
+              </tr>
+
+              <!-- Contato 5 (LID) -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-rose-500/20 to-pink-500/20 text-rose-500 flex items-center justify-center font-bold text-xs border border-rose-500/20">
+                    FL
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Fernanda Lima</span>
+                    <span class="text-xs text-muted-foreground">~Nanda Lima</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">100200300400@lid</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000005</td>
+              </tr>
+
+              <!-- Contato 6 (sem foto, usa ícone de usuário) -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground border border-border/40">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Lucas Pinheiro</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000006@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000006</td>
+              </tr>
+
+              <!-- Contato 7 (sem nome, mostra telefone) -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-indigo-500/20 to-blue-500/20 text-indigo-500 flex items-center justify-center font-bold text-xs border border-indigo-500/20">
+                    JF
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">+5511900000007</span>
+                    <span class="text-xs text-muted-foreground">~Juliana Ferreira</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000007@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000007</td>
+              </tr>
+
+              <!-- Contato 8 -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 text-teal-500 flex items-center justify-center font-bold text-xs border border-teal-500/20">
+                    MR
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Marcos Vinicius Rocha</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000008@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000008</td>
+              </tr>
+
+              <!-- Contato 9 -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-yellow-500/20 to-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs border border-amber-500/20">
+                    CS
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Camila Santos</span>
+                    <span class="text-xs text-muted-foreground">~Mila Santos</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000009@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000009</td>
+              </tr>
+
+              <!-- Contato 10 -->
+              <tr class="hover:bg-muted/30 transition-colors">
+                <td class="py-3 px-4">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 text-cyan-500 flex items-center justify-center font-bold text-xs border border-cyan-500/20">
+                    TA
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="flex flex-col">
+                    <span class="font-medium text-foreground">Thiago Albuquerque</span>
+                  </div>
+                </td>
+                <td class="py-3 px-4 hidden md:table-cell font-mono text-xs text-muted-foreground">5511900000010@s.whatsapp.net</td>
+                <td class="py-3 px-4 hidden sm:table-cell text-muted-foreground">+5511900000010</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Paginação -->
+        <div class="p-4 border-t border-border/50 flex items-center justify-between">
+          <button type="button" disabled
+                  class="h-10 px-4 rounded-xl text-xs font-semibold border border-border/50 bg-background text-muted-foreground opacity-50 cursor-not-allowed">
+            Anterior
+          </button>
+
+          <p class="text-xs text-muted-foreground font-medium">
+            Página 1 de 1
+          </p>
+
+          <button type="button" disabled
+                  class="h-10 px-4 rounded-xl text-xs font-semibold border border-border/50 bg-background text-muted-foreground opacity-50 cursor-not-allowed">
+            Próximo
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>
