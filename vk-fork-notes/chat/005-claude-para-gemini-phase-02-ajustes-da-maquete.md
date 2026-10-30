@@ -29,6 +29,17 @@ Projeto: `/home/vk/Documents/WORKSPACE/01-Projects/wa-akg`. Todos os comandos ro
 
 Como é HTML estático sem Node, escolha o mecanismo mais simples que funcione sem alterar `app.js`, `assets/app.css` nem `assets/tailwind-*`: por exemplo `:target` (âncoras `#lista` e `#conversa`) com CSS em `assets/maquete.css`, ou um `<script>` de poucas linhas dentro do próprio `chat.html`. Se usar CSS novo, ele vai em `assets/maquete.css` (arquivo da maquete, pode editar). Decida e explique na resposta. Abrir `chat.html` no celular deve mostrar a **lista** primeiro (no sistema real é assim); a conversa da Mariana Costa abre ao tocar no item dela.
 
+## Comandos que você pode rodar
+
+O `agy -p` nega qualquer comando fora desta lista (já aconteceu com `git -C ...`). Cada parte de um `&&` também precisa estar na lista.
+
+- Liberados (por prefixo): `node`, `grep`, `ls`, `diff`, `date`, `cat`, `git status`, `git diff`.
+- Rode `git status --short` direto, sem `-C` e sem `cd`: o comando funciona de qualquer subpasta do repositório. Para o `git diff`, o mesmo.
+- Para o `date`, use `date '+%Y-%m-%d %H:%M'`.
+- Para criar ou editar arquivo (HTML, CSS, SPEC, scripts de teste em `/tmp`, esta resposta), use as ferramentas de edição de arquivo, não `echo`, `sed` nem `tee`.
+- O Chrome já está instalado e o `validar-visual.mjs` o abre sozinho: **não rode** `google-chrome`, `chromium`, `which` nem `--version`. Para a prova do ajuste 2 (pedido 3), escreva um script `.mjs` em `/tmp` com a ferramenta de edição e rode-o com `node`, no estilo do `ferramentas/validar-visual.mjs` (copie a parte que abre o Chrome e fala por CDP). Ele pode abrir o Chrome por dentro do `node`.
+- **Uma negação encerra a sua execução inteira sem resposta.** Por isso, antes de rodar qualquer comando, confira se o primeiro termo está na lista acima; se não estiver, não rode. Escreva a resposta com o que já fez e liste em "Dúvidas e decisões" o que deixou de rodar e por quê. Grave a resposta (ferramenta de edição) assim que terminar a parte de código, antes das últimas verificações, e atualize-a depois.
+
 ## Estilo e convenções do código
 
 - Mesmas regras da 003: HTML semântico, `aria-label` em botão só de ícone, sem biblioteca nova, sem cor fixa, sem `style=""`.

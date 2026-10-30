@@ -198,7 +198,7 @@
       <div class="flex-1 min-h-0 flex rounded-2xl border border-border/50 bg-card overflow-hidden shadow-sm">
         
         <!-- Painel 1: Lista de conversas -->
-        <section aria-labelledby="titulo-conversas-lista" id="painel-lista-conversas" class="w-full md:w-80 lg:w-[340px] shrink-0 border-r border-border/40 flex flex-col bg-background hidden md:flex">
+        <section aria-labelledby="titulo-conversas-lista" id="painel-lista-conversas" class="w-full md:w-80 lg:w-[340px] shrink-0 border-r border-border/40 flex flex-col bg-background">
           <!-- Cabeçalho da lista -->
           <div class="p-3 border-b border-border/40 space-y-3">
             <div class="flex items-center justify-between">
@@ -229,7 +229,7 @@
           <!-- Itens da lista de conversas -->
           <div class="flex-1 overflow-y-auto divide-y divide-border/20" role="list">
             <!-- Item 1 (Ativo: Mariana Costa) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 border-l-2 border-l-primary cursor-pointer">
+            <div id="item-mariana-costa" role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 border-l-2 border-l-primary cursor-pointer">
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500/20 to-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0 border border-primary/20">
                 MC
               </div>
@@ -246,7 +246,7 @@
             </div>
 
             <!-- Item 2 (Grupo: Equipe de Operações VK) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+            <div role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 text-indigo-500 flex items-center justify-center font-bold text-xs shrink-0 border border-indigo-500/20">
                 EO
               </div>
@@ -264,7 +264,7 @@
             </div>
 
             <!-- Item 3 (Canal: Novidades WA-AKG) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+            <div role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-500 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-500/20">
                 NW
               </div>
@@ -278,7 +278,7 @@
             </div>
 
             <!-- Item 4 (Carlos Eduardo Silva - Imagem) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+            <div role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-primary/20 text-emerald-500 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-500/20">
                 CS
               </div>
@@ -292,7 +292,7 @@
             </div>
 
             <!-- Item 5 (Beatriz Alencar - Citação) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+            <div role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 text-purple-500 flex items-center justify-center font-bold text-xs shrink-0 border border-purple-500/20">
                 BA
               </div>
@@ -309,7 +309,7 @@
             </div>
 
             <!-- Item 6 (Rodrigo Martins - Link) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+            <div role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0 border border-amber-500/20">
                 RM
               </div>
@@ -326,7 +326,7 @@
             </div>
 
             <!-- Item 7 (Fernanda Lima - LID) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+            <div role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-rose-500/20 to-red-500/20 text-rose-500 flex items-center justify-center font-bold text-xs shrink-0 border border-rose-500/20">
                 FL
               </div>
@@ -340,7 +340,7 @@
             </div>
 
             <!-- Item 8 (Lucas Pinheiro) -->
-            <div role="listitem" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
+            <div role="listitem" data-chat-item tabindex="0" class="flex items-center gap-3 px-3 py-2.5 hover:bg-muted/40 transition-colors cursor-pointer border-l-2 border-l-transparent">
               <div class="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground font-bold text-xs shrink-0 border border-border/40">
                 LP
               </div>
@@ -356,14 +356,14 @@
         </section>
 
         <!-- Painel 2: Janela da conversa aberta (WhatsApp style) -->
-        <section aria-labelledby="titulo-conversa-ativa" id="painel-janela-chat" class="flex-1 min-w-0 flex flex-col bg-background">
+        <section aria-labelledby="titulo-conversa-ativa" id="painel-janela-chat" class="flex-1 min-w-0 flex flex-col bg-background hidden md:flex">
           <!-- Cabeçalho do contato atual -->
           <div class="h-16 shrink-0 px-3 sm:px-4 border-b border-border/40 flex items-center justify-between bg-card/60 backdrop-blur-sm z-10">
             <div class="flex items-center gap-2 sm:gap-3 min-w-0">
               <!-- Botão voltar no celular -->
-              <a href="chat.html" aria-label="Voltar para a lista de conversas" class="md:hidden h-10 w-10 flex items-center justify-center rounded-xl hover:bg-muted text-muted-foreground shrink-0">
+              <button type="button" id="btn-voltar-conversa" aria-label="Voltar para a lista de conversas" class="h-10 w-10 md:hidden flex items-center justify-center rounded-xl hover:bg-muted text-muted-foreground shrink-0 transition-colors cursor-pointer">
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
-              </a>
+              </button>
 
               <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500/20 to-primary/20 text-primary flex items-center justify-center font-bold text-sm shrink-0 border border-primary/20">
                 MC
@@ -590,5 +590,86 @@
     </main>
   </div>
 
+  <!-- Alternância das visões (lista e conversa) no celular -->
+  <script>
+    (function () {
+      const lista = document.getElementById('painel-lista-conversas');
+      const conversa = document.getElementById('painel-janela-chat');
+      const btnVoltar = document.getElementById('btn-voltar-conversa');
+      const itens = document.querySelectorAll('[data-chat-item]');
+
+      function isMobile() {
+        return window.innerWidth < 768;
+      }
+
+      function mostrarConversa() {
+        if (isMobile()) {
+          lista.classList.add('hidden');
+          lista.classList.remove('flex');
+          conversa.classList.remove('hidden');
+          conversa.classList.add('flex');
+        }
+      }
+
+      function mostrarLista() {
+        if (isMobile()) {
+          conversa.classList.add('hidden');
+          conversa.classList.remove('flex');
+          lista.classList.remove('hidden');
+          lista.classList.add('flex');
+        }
+      }
+
+      function atualizarLayout() {
+        if (!isMobile()) {
+          lista.classList.remove('hidden');
+          lista.classList.add('flex');
+          conversa.classList.remove('hidden');
+          conversa.classList.add('flex');
+        } else {
+          if (window.location.hash === '#conversa') {
+            mostrarConversa();
+          } else {
+            mostrarLista();
+          }
+        }
+      }
+
+      itens.forEach(function (el) {
+        el.addEventListener('click', function () {
+          window.location.hash = 'conversa';
+          mostrarConversa();
+        });
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.location.hash = 'conversa';
+            mostrarConversa();
+          }
+        });
+      });
+
+      if (btnVoltar) {
+        btnVoltar.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (window.location.hash === '#conversa') {
+            history.pushState('', document.title, window.location.pathname + window.location.search);
+          }
+          mostrarLista();
+        });
+      }
+
+      window.addEventListener('hashchange', function () {
+        if (window.location.hash === '#conversa') {
+          mostrarConversa();
+        } else {
+          mostrarLista();
+        }
+      });
+
+      window.addEventListener('resize', atualizarLayout);
+      atualizarLayout();
+    })();
+  </script>
 </body>
 </html>
