@@ -71,14 +71,16 @@ graphify-out/
 .agents/skills/chat-agent-auto/
 .agents/skills/chat-agent/
 .agents/skills/classificar-extrato/
+.agents/skills/claudio-design/
 .agents/skills/code-review/
 .agents/skills/ferramenta-captura/
 .agents/skills/frontend-design/
 .agents/skills/graphify/
-.agents/skills/grill-me/
-.agents/skills/grilling/
 .agents/skills/humanizer/
 .agents/skills/linux-guide/
+.agents/skills/matt-engineering/
+.agents/skills/me-pergunte/
+.agents/skills/prototype-lab/
 .agents/skills/redesign-skill/
 .agents/skills/reorg/
 .agents/skills/screen-tdd/
@@ -87,6 +89,7 @@ graphify-out/
 .agents/skills/superpowers-verification-before-completion/
 .agents/skills/taste-skill/
 .agents/skills/writing-for-agents/
+.agents/skills/youtube-repost/
 .claude/skills/ai-memory-handoff/
 .claude/skills/ai-memory-retrieval/
 .claude/skills/annotation-areas/
@@ -101,13 +104,15 @@ graphify-out/
 .claude/skills/chat-agent-auto/
 .claude/skills/chat-agent/
 .claude/skills/classificar-extrato/
+.claude/skills/claudio-design/
 .claude/skills/code-review/
 .claude/skills/ferramenta-captura/
 .claude/skills/frontend-design/
-.claude/skills/grill-me/
-.claude/skills/grilling/
 .claude/skills/humanizer/
 .claude/skills/linux-guide/
+.claude/skills/matt-engineering/
+.claude/skills/me-pergunte/
+.claude/skills/prototype-lab/
 .claude/skills/redesign-skill/
 .claude/skills/reorg/
 .claude/skills/screen-tdd/
@@ -116,4 +121,5 @@ graphify-out/
 .claude/skills/superpowers-verification-before-completion/
 .claude/skills/taste-skill/
 .claude/skills/writing-for-agents/
+.claude/skills/youtube-repost/
 # <<< skills do cofre <<<
